@@ -6,14 +6,15 @@ export const MAIN_THEME = 'mainTheme';
 export const mainTheme: ThemeDefinition = {
   dark: false,
   colors: {
-    background: '#FFFFFF',
-    surface: '#FFFFFF',
-    primary: '#4f46e5',
-    secondary: '#9333ea',
-    error: '#ef4444',
-    info: '#3b82f6',
-    success: '#22c55e',
-    warning: '#f59e0b',
+    primary: '#2f6ed4',
+    secondary: '#53dade',
+    accent: '#fe9ee2',
+    error: '#FE1592',
+    warning: '#ea7200',
+    tips: '#85E695',
+    mainBase: '#000000',
+    fontColor: '#666666',
+    borderColor: '#808080',
   },
 };
 
@@ -23,13 +24,12 @@ export const MAIN_DARK_THEME = 'mainDarkTheme';
 export const mainDarkTheme: ThemeDefinition = {
   dark: true,
   colors: {
-    background: '#0C111B',
-    surface: '#1f2937',
-    primary: '#6366f1',
-    secondary: '#9333ea',
-    error: '#ef4444',
-    info: '#3b82f6',
-    success: '#22c55e',
-    warning: '#f59e0b',
+    primary: '#61A8E8',
+    secondary: '#476088',
+    accent: '#4FDDC3',
+    error: '#FF6D74',
+    warning: '#FFC562',
+    fontColor: '#666666',
+    borderColor: '#808080',
   },
 };

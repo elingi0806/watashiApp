@@ -28,4 +28,19 @@ export default defineNuxtConfig({
     },
   },
   css: ['@/assets/main.scss'],
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Sen:wght@700&display=swap',
+          crossorigin: '',
+        },
+      ],
+    },
+  },
 });

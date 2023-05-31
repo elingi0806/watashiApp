@@ -1,0 +1,46 @@
+.cursorPointer {
+  cursor: pointer;
+}
+.cursorDefault {
+  cursor: default;
+}
+.absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  -webkit-transform: translateY(-50%) translateX(-50%);
+}
+.container {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  .v-main {
+    height: 100%;
+    width: 100%;
+  }
+  .row {
+    margin: 0;
+    padding: 0;
+  }
+}
+.appInput {
+  padding: 5px 10px;
+  color: var(--v-fontColor-base);
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid var(--v-borderColor-base);
+  &:focus {
+    border: 1px solid var(--v-primary-base);
+  }
+  &:disabled {
+    background-color: var(--v-borderColor-lighten4);
+    border: 1px solid var(--v-borderColor-darken4);
+  }
+}
+.appButton {
+  height: 30px;
+  width: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+}

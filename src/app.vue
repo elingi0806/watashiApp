@@ -1,5 +1,5 @@
 <template>
-  <div>
-    <VBtn color="primary"> Vuetify のボタン</VBtn>
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

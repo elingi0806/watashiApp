@@ -1,0 +1,66 @@
+.modal_wrap input {
+  display: none;
+}
+.modal_overlay {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0s 0.5s;
+  transform: scale(0);
+}
+.modal_trigger {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.modal_content {
+  align-self: center;
+  width: 60%;
+  max-width: 800px;
+  min-width: 300px;
+  padding: 20px 15px 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background: #fff;
+  line-height: 1.4em;
+  transform: scale(0.3);
+  transition: 0.3s;
+  .dialogContent {
+    min-height: 50px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .dialogButtons {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    .buttons-position {
+      display: flex;
+    }
+  }
+}
+.close_button {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 24px;
+  padding-right: 3px;
+  cursor: pointer;
+}
+.modal_wrap input:checked ~ .modal_overlay {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s;
+}
+.modal_wrap input:checked ~ .modal_overlay .modal_content {
+  transform: scale(1);
+}
