@@ -59,6 +59,7 @@
 import appMenu from '@/components/appMenu';
 import appDialog from '@/components/appDialog/index.vue';
 import '@/assets/common.scss';
+
 export default {
   name: 'DefaultLayout',
   components: { appMenu, appDialog },

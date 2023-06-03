@@ -1,4 +1,7 @@
 import { mdiMenu, mdiArrowLeftThick, mdiHome, mdiChartArc } from '@mdi/js';
+import { useMystore } from '../../stores/mainStore.js';
+const mystore = useMystore();
+
 export default {
   name: 'AppMenuComponent',
   data() {
@@ -21,29 +24,27 @@ export default {
           title: 'WORK TIME',
         },
       ],
+      menutitle: '',
     };
   },
   computed: {
-    /*
-    storeSelectedMenu: {
-      get() {
-        return this.$store.state.selected_menu_id
-      },
-      set(id) {
-        this.$store.commit('set_selected_menu_id', id)
-      },
-    },
-    */
+    //
   },
   mounted() {
-    // this.selectedMenu = this.storeSelectedMenu
+    if (typeof mystore.selected_menu_id !== 'undefined') {
+      this.selectedMenu = mystore.selected_menu_id;
+      this.setMenuTitle();
+    }
   },
   watch: {
     /**
      * タイトル文字列のアニメーション
      */
     selectedMenu(newVal) {
-      // this.storeSelectedMenu = newVal
+      mystore.set_selected_menu_id(newVal);
+
+      // メニュータイトルを変数に代入
+      this.setMenuTitle();
 
       // タイトル文字列のアニメーションを開始
       const titleID = document.getElementById('title');
@@ -55,10 +56,19 @@ export default {
     },
   },
   computed: {
-    /**
-     * メニュータイトル文字列
-     */
-    menutitle() {
+    //
+  },
+  methods: {
+    openMenu() {
+      this.drawer = true;
+    },
+    closeMenu() {
+      this.drawer = false;
+    },
+    selectMenu(menuID) {
+      this.selectedMenu = menuID;
+    },
+    setMenuTitle() {
       let tmptitle = this.menus.find((m) => m.id === this.selectedMenu);
       if (!tmptitle) {
         tmptitle = { title: 'Not Found' };
@@ -72,18 +82,7 @@ export default {
           title += `<span>${char}</span>`;
         }
       }
-      return title;
-    },
-  },
-  methods: {
-    openMenu() {
-      this.drawer = true;
-    },
-    closeMenu() {
-      this.drawer = false;
-    },
-    selectMenu(menuID) {
-      this.selectedMenu = menuID;
+      this.menutitle = title;
     },
   },
 };

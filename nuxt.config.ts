@@ -6,7 +6,11 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
-  modules: ['nuxt-electron'],
+  modules: [
+    'nuxt-electron',
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+  ],
   electron: {
     build: [
       {
