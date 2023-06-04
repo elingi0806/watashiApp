@@ -1,51 +1,60 @@
 <v-container>
-  <div style="height: 100%; width: 100%">work-ctr</div>
-  <!--
-  <v-main>
-    <v-row>
-      <v-col cols="12" class="teamsSendSetting">
-        <span>業務開始・終了時にTeamsにメッセージを送信する</span>
-        <div class="teamsicon">
-          <img v-show="sendMessageFlag" class="absoluteCenter" style="height:auto;width:30px" src="~/assets/icons/icons8-microsoft-teams-2019-128.svg"></img>
-          <img v-show="!sendMessageFlag" class="absoluteCenter" style="height:auto;width:33px" src="~/assets/icons/icons8-microsoft-teams-2019-200.svg"></img>
-        </div>
-        <v-switch
-          v-model="sendMessageFlag"
-          class="teamsSettingSwitch"
-          color="secondary"
-          hide-details
-        ></v-switch>
-      </v-col>
-      <v-col cols="12">
-        <v-card>
-          <v-card-item>
-            <div>
-              webhook:
-              <input class="appInput" v-model="json_teams_data.webhook" >
-              title:
-              <input class="appInput" v-model="json_teams_data.title"  >
-              text:
-              <input class="appInput" v-model="json_teams_data.text"  >
-            </div>
-          </v-card-item>
-          <v-card-actions>
-            <v-btn class="appButton" variant="outlined" @click="saveSetting">
-              Button
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
+  <v-row>
+    <v-col cols="12" class="teamsSendSetting">
+      <span>業務開始・終了時にTeamsにメッセージを送信する</span>
+      <div class="teamsicon">
+        <img
+          v-show="sendMessageFlag"
+          class="absoluteCenter"
+          style="height: auto; width: 30px"
+          src="~/assets/icons/icons8-microsoft-teams-2019-128.svg"
+        />
+        <img
+          v-show="!sendMessageFlag"
+          class="absoluteCenter"
+          style="height: auto; width: 33px"
+          src="~/assets/icons/icons8-microsoft-teams-2019-200.svg"
+        />
+      </div>
+      <v-switch
+        v-model="sendMessageFlag"
+        class="teamsSettingSwitch"
+        color="primary"
+        hide-details
+      ></v-switch>
+    </v-col>
+    <v-col cols="12">
+      <div>
+        webhook:
+        <input
+          class="appInput"
+          v-model="json_teams_data.webhook"
+          style="border: 1px solid red"
+        />
+        title:
+        <input class="appInput" v-model="json_teams_data.title" />
+        text:
+        <input class="appInput" v-model="json_teams_data.text" />
+      </div>
+      <v-btn class="appButton" variant="outlined" @click="saveSetting">
+        Button
+      </v-btn>
+    </v-col>
+  </v-row>
 
-    <v-row>
-      <v-col cols="9"></v-col>
-      <v-col cols="3">
-        <v-btn @click="sendTeams" :disabled="!sendMessageFlag">Teams送信</v-btn>
-        <v-btn>業務開始</v-btn>
-      </v-col>
-    </v-row>
+  <v-row>
+    <v-col cols="9"></v-col>
+    <v-col cols="3">
+      <v-btn @click="sendTeams" :disabled="!sendMessageFlag">Teams送信</v-btn>
+      <v-btn>業務開始</v-btn>
+    </v-col>
+  </v-row>
 
-  </v-main>
+  <v-row>
+    API呼び出しテスト：
+    <v-btn @click="test">test</v-btn><br />
+  </v-row>
+
   <appDialog
     v-model="dialog"
     :title="dialogProps.title"
@@ -55,5 +64,4 @@
   >
     {{dialogProps.message}}
   </appDialog>
-  -->
 </v-container>

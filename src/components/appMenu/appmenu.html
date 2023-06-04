@@ -44,6 +44,7 @@
         :value="menu.id"
         color="primary"
         class="pa-0"
+        :active="menu.id === selectedMenu"
         @click="selectMenu(menu.id)"
       >
         <NuxtLink :to="menu.link" class="nuxtLinkDiv">

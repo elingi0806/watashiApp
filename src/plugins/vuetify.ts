@@ -32,7 +32,17 @@ export default defineNuxtPlugin((nuxtApp) => {
       },
       // primary-darken-9 primary-lighten-9 までできるようにする
       variations: {
-        colors: ['primary', 'secondary', 'accent'],
+        colors: [
+          'primary',
+          'secondary',
+          'accent',
+          'error',
+          'warning',
+          'tips',
+          'mainBase',
+          'fontColor',
+          'borderColor',
+        ],
         lighten: 9,
         darken: 9,
       },

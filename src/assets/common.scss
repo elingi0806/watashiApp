@@ -11,15 +11,13 @@
   transform: translateY(-50%) translateX(-50%);
   -webkit-transform: translateY(-50%) translateX(-50%);
 }
-.container {
+.v-container {
   height: 100%;
   width: 100%;
-  padding: 0;
-  .v-main {
-    height: 100%;
-    width: 100%;
-  }
-  .row {
+  margin: 0;
+  padding: 0 !important;
+  .v-row,
+  .v-col {
     margin: 0;
     padding: 0;
   }

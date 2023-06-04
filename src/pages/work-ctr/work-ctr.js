@@ -1,8 +1,8 @@
-// import fs from 'fs';
-// import webapi from '~/modules/web-apis.js'
 import appDialog from '~/components/appDialog/index.vue';
+import webapis from '~/general/apis/web-apis.ts';
+import otherapis from '~/general/apis/other-apis.ts';
 
-const filePath = 'src/renderer/assets/json/webhook_teams.json';
+const filePath = '~/assets/json/webhook_teams.json';
 
 export default {
   components: {
@@ -30,33 +30,20 @@ export default {
       },
     };
   },
-  mounted() {
-    /*
-    // temas webhookファイルの存在確認
+  async mounted() {
+    // temas webhookファイルの読込
     try {
-      fs.statSync(filePath);
-      this.notExistTeamsSettingFlag = false;
+      const response = await webapis.ReadTeamsSetting();
+      console.log('★', response.data);
+      this.json_teams_data.webhook = response.data.FileData.webhook;
+      this.json_teams_data.title = response.data.FileData.title;
+      this.json_teams_data.text = response.data.FileData.text;
     } catch (err) {
-      this.notExistTeamsSettingFlag = true;
-      this.sendMessageFlag = false;
-    }
-    // ファイルからURLの読み込み
-    try {
-      const filejson = fs.readFileSync(filePath, 'utf8');
-      this.json_teams_data.webhook = JSON.parse(filejson)?.webhook;
-      this.json_teams_data.title = JSON.parse(filejson)?.title;
-      this.json_teams_data.text = JSON.parse(filejson)?.text;
-    } catch (err) {
-      // teams送信フラグがONの時に設定ファイルを読み込めなかった場合はエラーメッセージ
       if (this.sendMessageFlag) {
-        this.setDialogMessage(
-          0,
-          ``,
-          `設定の読み込みに失敗しました。${filePath}の読込権限を確認してください。`
-        );
+        // teams送信フラグがONの時に設定ファイルを読み込めなかった場合はエラーメッセージ
+        this.setDialogMessage(0, ``, `設定の読み込みに失敗しました。`);
       }
     }
-    */
   },
   computed: {},
   watch: {},
@@ -99,19 +86,17 @@ export default {
       if (this.json_teams_data.title.length > 0) {
         requestData.title = this.json_teams_data.title;
       }
-      /*
       try {
-        const response = await webapi.sendTeamsMessage(
+        const response = await otherapis.sendTeamsMessage(
           this.json_teams_data.webhook,
           requestData
-        )
-        this.setDialogMessage(0, ``, `メッセージの送信に成功しました。`)
-        console.log('sendMessage success', response)
+        );
+        this.setDialogMessage(0, ``, `メッセージの送信に成功しました。`);
+        console.log('sendMessage success', response);
       } catch (err) {
-        this.setDialogMessage(0, ``, `メッセージの送信に失敗しました。`)
-        console.error('sendMessage error', err)
+        this.setDialogMessage(0, ``, `メッセージの送信に失敗しました。`);
+        console.error('sendMessage error', err);
       }
-      */
     },
     /**
      * ダイアログOK
@@ -129,9 +114,9 @@ export default {
      * ダイアログ内の文字列を設定,表示する
      */
     setDialogMessage(buttonCount, title, message) {
-      this.$set(this.dialogProps, `buttonCount`, buttonCount);
-      this.$set(this.dialogProps, `title`, title);
-      this.$set(this.dialogProps, `message`, message);
+      this.dialogProps.buttonCount = buttonCount;
+      this.dialogProps.title = title;
+      this.dialogProps.message = message;
       this.dialog = true;
     },
     /**
@@ -139,6 +124,25 @@ export default {
      */
     teamsSettingOK() {
       this.saveSetting();
+    },
+    async test() {
+      /*
+      const response1 = await otherapis.SayJoke();
+      console.log('★', response1.data);
+      const response2 = await otherapis.getWeather();
+      console.log('★', response2.data);
+      */
+      const requestData = {
+        text: this.json_teams_data.text,
+      };
+      if (this.json_teams_data.title.length > 0) {
+        requestData.title = this.json_teams_data.title;
+      }
+      const response = await webapis.SendTeamsMessage(
+        this.json_teams_data.webhook,
+        requestData
+      );
+      console.log('★', response.data);
     },
   },
 };
