@@ -34,7 +34,6 @@ export default {
     // temas webhookファイルの読込
     try {
       const response = await webapis.ReadTeamsSetting();
-      console.log('★', response.data);
       this.json_teams_data.webhook = response.data.FileData.webhook;
       this.json_teams_data.title = response.data.FileData.title;
       this.json_teams_data.text = response.data.FileData.text;
@@ -51,7 +50,7 @@ export default {
     /**
      * webhookのURLをtxtに保存
      */
-    saveSetting() {
+    async saveSetting() {
       // URLの型と一致するかチェック
       const pattern =
         /https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#\u3000-\u30FE\u4E00-\u9FA0\uFF01-\uFFE3]+/g;
@@ -60,21 +59,18 @@ export default {
         this.setDialogMessage(0, ``, `入力したURLが正しいか確認してください。`);
         return;
       }
-      /*
       try {
-        fs.writeFileSync(
-          filePath,
-          JSON.stringify(this.json_teams_data, null, '    ')
-        );
+        const response = await webapis.WriteTeamsSetting(this.json_teams_data);
         this.setDialogMessage(0, ``, `設定の保存が完了しました。`);
+        console.log('saveSetting success', response);
       } catch (err) {
         this.setDialogMessage(
           0,
           ``,
           `設定の保存に失敗しました。${filePath}の読込権限を確認してください。`
         );
+        console.log('saveSetting error', err);
       }
-      */
     },
     /**
      * teamsにメッセージを送る
@@ -87,7 +83,7 @@ export default {
         requestData.title = this.json_teams_data.title;
       }
       try {
-        const response = await otherapis.sendTeamsMessage(
+        const response = await webapis.SendTeamsMessage(
           this.json_teams_data.webhook,
           requestData
         );
@@ -124,25 +120,6 @@ export default {
      */
     teamsSettingOK() {
       this.saveSetting();
-    },
-    async test() {
-      /*
-      const response1 = await otherapis.SayJoke();
-      console.log('★', response1.data);
-      const response2 = await otherapis.getWeather();
-      console.log('★', response2.data);
-      */
-      const requestData = {
-        text: this.json_teams_data.text,
-      };
-      if (this.json_teams_data.title.length > 0) {
-        requestData.title = this.json_teams_data.title;
-      }
-      const response = await webapis.SendTeamsMessage(
-        this.json_teams_data.webhook,
-        requestData
-      );
-      console.log('★', response.data);
     },
   },
 };

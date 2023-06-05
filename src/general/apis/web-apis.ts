@@ -8,6 +8,17 @@ async function ReadTeamsSetting() {
   return formatResponse;
 }
 /**
+ *  teamsの設定ファイルを呼び出し(内部API呼び出し)
+ */
+async function WriteTeamsSetting(data: object) {
+  const response = await useFetch('/api/write-teams-setting', {
+    method: 'POST',
+    body: JSON.parse(JSON.stringify(data)),
+  });
+  const formatResponse = util.formatResponse(response);
+  return formatResponse;
+}
+/**
  *  teamsにメッセージ送信(内部API呼び出し)
  */
 async function SendTeamsMessage(url: string, data: object) {
@@ -19,4 +30,4 @@ async function SendTeamsMessage(url: string, data: object) {
   return formatResponse;
 }
 
-export default { ReadTeamsSetting, SendTeamsMessage };
+export default { ReadTeamsSetting, WriteTeamsSetting, SendTeamsMessage };
