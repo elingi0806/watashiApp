@@ -42,6 +42,8 @@ export default defineNuxtPlugin((nuxtApp) => {
           'mainBase',
           'fontColor',
           'borderColor',
+          'disabledFontColor',
+          'disabledBorderColor',
         ],
         lighten: 9,
         darken: 9,

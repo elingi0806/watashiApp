@@ -27,7 +27,7 @@
   width: 100%;
   padding-left: 10px;
   display: flex;
-  color: var(--v-fontColor-base);
+  color: rgb(var(--v-theme-fontColor));
   text-decoration: none !important;
   position: relative;
   .v-icon {
@@ -44,7 +44,7 @@
     display: flex;
     position: relative;
     top: -30px;
-    color: var(--v-primary-base);
+    color: rgb(var(--v-theme-primary));
     border: 1px solid black;
 
     span {

@@ -1,3 +1,4 @@
+import { mdiHome } from '@mdi/js';
 import appDialog from '~/components/appDialog/index.vue';
 import webapis from '~/general/apis/web-apis.ts';
 import otherapis from '~/general/apis/other-apis.ts';
@@ -28,6 +29,9 @@ export default {
         message: '',
         buttonCount: 0,
       },
+
+      // テスト
+      mdiHome,
     };
   },
   async mounted() {

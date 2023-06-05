@@ -15,6 +15,8 @@ export const mainTheme: ThemeDefinition = {
     mainBase: '#000000',
     fontColor: '#666666',
     borderColor: '#808080',
+    disabledFontColor: '	#B1B3B6',
+    disabledBorderColor: '#C0C0C0',
   },
 };
 
@@ -31,5 +33,7 @@ export const mainDarkTheme: ThemeDefinition = {
     warning: '#FFC562',
     fontColor: '#666666',
     borderColor: '#808080',
+    disabledFontColor: '	#B1B3B6',
+    disabledBorderColor: '#C0C0C0',
   },
 };

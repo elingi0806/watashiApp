@@ -24,16 +24,16 @@
 }
 .appInput {
   padding: 5px 10px;
-  color: var(--v-fontColor-base);
+  color: rgb(var(--v-theme-fontColor));
   outline: none;
   border-radius: 5px;
-  border: 1px solid var(--v-borderColor-base);
+  border: 1px solid rgb(var(--v-theme-borderColor));
   &:focus {
-    border: 1px solid var(--v-primary-base);
+    border: 1px solid rgb(var(--v-theme-primary));
   }
   &:disabled {
-    background-color: var(--v-borderColor-lighten4);
-    border: 1px solid var(--v-borderColor-darken4);
+    background-color: rgb(var(--v-theme-disabledFontColor));
+    border: 1px solid rgb(var(--v-theme-disabledBorderColor));
   }
 }
 .appButton {
