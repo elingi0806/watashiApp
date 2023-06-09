@@ -1,0 +1,38 @@
+<template>
+  <div class="text-center">
+    <v-dialog v-model="value" :width="width != 0 ? width : 'auto'" persistent>
+      <v-card>
+        <button
+          v-show="buttonCount === 0 || showcrossicon"
+          class="close_button"
+          @click="clickBatu"
+        >
+          ✖️
+        </button>
+        <v-card-title v-show="title !== ''">
+          <h2>{{title}}</h2>
+        </v-card-title>
+        <v-card-text class="dialogContent">
+          <slot></slot>
+        </v-card-text>
+        <v-card-actions v-show="buttonCount > 0" class="dialogButtons">
+          <v-btn @click="clickOk" class="appButton"> {{okText}} </v-btn>
+          <v-btn
+            v-show="buttonCount > 1"
+            @click="clickCancel"
+            class="appButton"
+          >
+            {{cancelText}}
+          </v-btn>
+          <v-btn
+            v-show="buttonCount > 2"
+            @click="clickCustom"
+            class="appButton"
+          >
+            {{customText}}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>

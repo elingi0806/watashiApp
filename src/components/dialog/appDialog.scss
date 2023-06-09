@@ -1,0 +1,26 @@
+.dialogContent {
+  min-height: 50px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.close_button {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 24px;
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+  padding-right: 2px;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(var(--v-theme-fontColor), 0.1);
+  }
+}
+.dialogButtons {
+  display: flex;
+  .appButton {
+    margin: auto;
+  }
+}

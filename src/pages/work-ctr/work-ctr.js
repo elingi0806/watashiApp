@@ -1,14 +1,11 @@
 import { mdiHome } from '@mdi/js';
-import appDialog from '~/components/appDialog/index.vue';
 import webapis from '~/general/apis/web-apis.ts';
-import otherapis from '~/general/apis/other-apis.ts';
+// import otherapis from '~/general/apis/other-apis.ts';
 
 const filePath = '~/assets/json/webhook_teams.json';
 
 export default {
-  components: {
-    appDialog,
-  },
+  name: 'workpage',
   data() {
     return {
       // チームズにメッセージ送信するかのフラグ
@@ -28,10 +25,12 @@ export default {
         title: '',
         message: '',
         buttonCount: 0,
+        width: 0,
       },
 
       // テスト
       mdiHome,
+      commonDialog: false,
     };
   },
   async mounted() {
@@ -44,7 +43,7 @@ export default {
     } catch (err) {
       if (this.sendMessageFlag) {
         // teams送信フラグがONの時に設定ファイルを読み込めなかった場合はエラーメッセージ
-        this.setDialogMessage(0, ``, `設定の読み込みに失敗しました。`);
+        this.setDialogMessage(1, ``, `設定の読み込みに失敗しました。`, 0);
       }
     }
   },
@@ -60,18 +59,24 @@ export default {
         /https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#\u3000-\u30FE\u4E00-\u9FA0\uFF01-\uFFE3]+/g;
       const url_check = pattern.test(this.json_teams_data.webhook);
       if (!url_check) {
-        this.setDialogMessage(0, ``, `入力したURLが正しいか確認してください。`);
+        this.setDialogMessage(
+          1,
+          ``,
+          `入力したURLが正しいか確認してください。`,
+          0
+        );
         return;
       }
       try {
         const response = await webapis.WriteTeamsSetting(this.json_teams_data);
-        this.setDialogMessage(0, ``, `設定の保存が完了しました。`);
+        this.setDialogMessage(1, ``, `設定の保存が完了しました。`, 0);
         console.log('saveSetting success', response);
       } catch (err) {
         this.setDialogMessage(
-          0,
+          1,
           ``,
-          `設定の保存に失敗しました。${filePath}の読込権限を確認してください。`
+          `設定の保存に失敗しました。${filePath}の読込権限を確認してください。`,
+          0
         );
         console.log('saveSetting error', err);
       }
@@ -91,10 +96,10 @@ export default {
           this.json_teams_data.webhook,
           requestData
         );
-        this.setDialogMessage(0, ``, `メッセージの送信に成功しました。`);
+        this.setDialogMessage(1, ``, `メッセージの送信に成功しました。`, 0);
         console.log('sendMessage success', response);
       } catch (err) {
-        this.setDialogMessage(0, ``, `メッセージの送信に失敗しました。`);
+        this.setDialogMessage(1, ``, `メッセージの送信に失敗しました。`, 0);
         console.error('sendMessage error', err);
       }
     },
@@ -113,10 +118,11 @@ export default {
     /**
      * ダイアログ内の文字列を設定,表示する
      */
-    setDialogMessage(buttonCount, title, message) {
+    setDialogMessage(buttonCount, title, message, width) {
       this.dialogProps.buttonCount = buttonCount;
       this.dialogProps.title = title;
       this.dialogProps.message = message;
+      this.dialogProps.width = width;
       this.dialog = true;
     },
     /**

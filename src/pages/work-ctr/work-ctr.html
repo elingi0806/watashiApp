@@ -27,11 +27,7 @@
       <v-icon :icon="mdiHome" color="accent"></v-icon>
       <div>
         webhook:
-        <input
-          class="appInput"
-          v-model="json_teams_data.webhook"
-          style="border: 1px solid red"
-        />
+        <input class="appInput" v-model="json_teams_data.webhook" />
         title:
         <input class="appInput" v-model="json_teams_data.title" />
         text:
@@ -51,13 +47,20 @@
     </v-col>
   </v-row>
 
-  <appDialog
-    v-model="dialog"
-    :title="dialogProps.title"
-    :buttonCount="dialogProps.buttonCount"
-    @clickOk="dialogOK"
-    @clickBatu="dialogCancel"
-  >
-    {{dialogProps.message}}
-  </appDialog>
+  <v-row>
+    <v-btn @click="dialog = !dialog">test</v-btn>
+  </v-row>
+
+  <v-row style="border: 1px solid black">
+    <DialogAppdialog
+      :value="dialog"
+      :title="dialogProps.title"
+      :buttonCount="dialogProps.buttonCount"
+      :width="dialogProps.width"
+      @clickOk="dialogOK"
+      @clickBatu="dialogCancel"
+    >
+      {{dialogProps.message}}
+    </DialogAppdialog>
+  </v-row>
 </v-container>

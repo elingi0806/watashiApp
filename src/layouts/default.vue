@@ -23,7 +23,7 @@
         <v-col class="text-center" cols="12">
           {{ new Date().getFullYear() }} — <strong>watashiApp</strong>
           <v-btn
-            @click="dialog = true"
+            @click="showAboutMe"
             color="primary"
             flat
             rounded="xl"
@@ -35,13 +35,13 @@
       </v-row>
     </v-footer>
     <!--about me-->
-    <appDialog
-      v-model="dialog"
+    <DialogAppdialog
+      :value="dialog"
       title="About me"
       message="お知らせ"
-      :buttonCount="1"
+      :buttonCount="0"
       okText="閉じる"
-      @clickOk="dialog = false"
+      @clickBatu="dialog = false"
     >
       <div>
         内藤 春が作成したデスクトップアプリです。<br />
@@ -51,22 +51,26 @@
           <li>ICON8：<a href="https://icons8.com">https://icons8.com</a></li>
         </ul>
       </div>
-    </appDialog>
+    </DialogAppdialog>
   </v-app>
 </template>
 
 <script>
 import appMenu from '@/components/appMenu';
-import appDialog from '@/components/appDialog/index.vue';
 import '@/assets/common.scss';
 
 export default {
   name: 'DefaultLayout',
-  components: { appMenu, appDialog },
+  components: { appMenu },
   data() {
     return {
       dialog: false,
     };
+  },
+  methods: {
+    showAboutMe() {
+      this.dialog = true;
+    },
   },
 };
 </script>

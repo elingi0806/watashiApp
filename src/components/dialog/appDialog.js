@@ -20,6 +20,10 @@ export default {
       type: Number,
       default: 1,
     },
+    width: {
+      type: Number,
+      default: 0,
+    },
     // OKボタンのテキスト
     okText: {
       type: String,
@@ -37,7 +41,7 @@ export default {
     },
   },
   data() {
-    return {}
+    return {};
   },
   computed: {},
   mounted() {},
@@ -45,16 +49,16 @@ export default {
   computed: {},
   methods: {
     clickOk() {
-      this.$emit('clickOk')
+      this.$emit('clickOk');
     },
     clickCancel() {
-      this.$emit('clickCancel')
+      this.$emit('clickCancel');
     },
     clickCustom() {
-      this.$emit('clickCustom')
+      this.$emit('clickCustom');
     },
     clickBatu() {
-      this.$emit('clickBatu')
+      this.$emit('clickBatu');
     },
   },
-}
+};
