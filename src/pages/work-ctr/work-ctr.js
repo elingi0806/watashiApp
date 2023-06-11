@@ -16,9 +16,9 @@ export default {
       mystore: null,
 
       // 時刻情報
-      starttime: 0,
-      endtime: 0,
       formatStr: 'YYYY-MM-DD HH:mm',
+      formatDate: 'YYYYMMDD',
+      formatTime: 'HH:mm',
 
       // 設定関連
       settingTeamsDialog: false,
@@ -43,6 +43,19 @@ export default {
   async mounted() {
     // storeを読み込み
     this.mystore = useMystore();
+
+    console.log('★', moment(this.starttime).startOf('days'));
+    // storeの業務時刻データが本日中ではなかったらデータを初期化する
+    if (
+      this.starttime === '' ||
+      this.endttime === '' ||
+      moment(this.starttime).startOf('days').format(this.formatDate) !==
+        moment().startOf('days').format(this.formatDate) ||
+      moment(this.endtime).startOf('days').format(this.formatDate) !==
+        moment().startOf('days').format(this.formatDate)
+    ) {
+      this.mystore.init_worktime();
+    }
     // temas webhookファイルの読込
     try {
       const response = await webapis.ReadTeamsSetting();
@@ -104,18 +117,66 @@ export default {
       },
     },
     starttimeStr() {
-      if (this.starttime !== 0) {
-        return moment(this.starttime).format(this.formatStr);
+      if (this.starttime !== '') {
+        return this.starttime;
       } else {
         return '設定なし';
       }
     },
     endtimeStr() {
-      if (this.endtime !== 0) {
-        return moment(this.endtime).format(this.formatStr);
+      if (this.endtime !== '') {
+        return this.endtime;
       } else {
         return '設定なし';
       }
+    },
+    starttime: {
+      get() {
+        if (this.mystore) {
+          return this.mystore.work_starttime;
+        } else {
+          return '';
+        }
+      },
+      set(newVal) {
+        this.mystore.set_work_starttime(newVal);
+      },
+    },
+    endtime: {
+      get() {
+        if (this.mystore) {
+          return this.mystore.work_endtime;
+        } else {
+          return '';
+        }
+      },
+      set(newVal) {
+        this.mystore.set_work_endtime(newVal);
+      },
+    },
+    resttime: {
+      get() {
+        if (this.mystore) {
+          return this.mystore.work_resttime;
+        } else {
+          return {};
+        }
+      },
+      set(time) {
+        this.mystore.set_work_resttime(time);
+      },
+    },
+    reststarttime: {
+      get() {
+        if (this.mystore) {
+          return this.mystore.work_rest_starttime;
+        } else {
+          return {};
+        }
+      },
+      set(time) {
+        this.mystore.set_work_rest_starttime(time);
+      },
     },
   },
   watch: {},
@@ -182,12 +243,13 @@ export default {
      * 業務開始ボタンクリック
      */
     async startWork() {
+      this.mystore.init_worktime();
       // teams送信フラグがONの場合、メッセージを送信する
       if (this.sendMessageFlag) {
         await this.sendTeams();
       }
-      this.starttime = moment();
-      this.endtime = 0;
+      this.starttime = moment().format(this.formatStr);
+      this.endtime = '';
       this.startWorkingFlag = true;
     },
     /**
@@ -197,6 +259,25 @@ export default {
       // teams送信フラグがONの場合、メッセージを送信する
       if (this.sendMessageFlag) {
         await this.sendTeams();
+      }
+      if (!this.restWorkingFlag) {
+        // 休憩を始める場合
+        this.reststarttime = moment().format(this.formatTime);
+      } else {
+        // 休憩を終了する場合
+        const restendtime = moment().format(this.formatTime);
+        if (this.reststarttime !== '') {
+          const resttimeTmp = `${this.reststarttime}-${restendtime}`;
+          this.resttime = resttimeTmp;
+        } else {
+          this.setDialogMessage(
+            1,
+            ``,
+            `休憩開始時刻が保存されていません。休憩時刻を保存できませんでした。`,
+            0
+          );
+        }
+        this.reststarttime = '';
       }
       this.restWorkingFlag = !this.restWorkingFlag;
     },
@@ -208,7 +289,14 @@ export default {
       if (this.sendMessageFlag) {
         await this.sendTeams();
       }
-      this.endtime = moment();
+      this.endtime = moment().format(this.formatStr);
+
+      const date = moment(this.starttime).format(this.formatDate);
+      const start = moment(this.starttime).format(this.formatTime);
+      const end = moment(this.endtime).format(this.formatTime);
+
+      await this.writeCSV(date, start, end, this.resttime);
+
       this.startWorkingFlag = false;
       this.restWorkingFlag = false;
     },
@@ -249,7 +337,7 @@ export default {
       // ★ここで設定を元に戻しておく
       this.settingTeamsDialog = false;
     },
-    async test() {
+    async readCSV() {
       try {
         const response = await webapis.ReadWorkTime('202306');
         if (!response.data) {
@@ -266,14 +354,9 @@ export default {
         console.error('★error', err);
       }
     },
-    async test2() {
+    async writeCSV(date, start, end, rest) {
       try {
-        const response = await webapis.SaveWorkTime(
-          '20230601',
-          '9:00',
-          '17:30',
-          { 1: '12:15-13:00' }
-        );
+        const response = await webapis.SaveWorkTime(date, start, end, rest);
         console.log('★success', response);
       } catch (err) {
         this.setDialogMessage(1, ``, `CSVの書き込みに失敗しました。`, 0);

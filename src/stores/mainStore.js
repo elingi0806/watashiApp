@@ -7,6 +7,10 @@ export const useMystore = defineStore('myStore', {
     teams_send_flag: false, // Teams送信フラグ
     start_work_flag: false, // 業務開始フラグ
     rest_work_flag: false, // 業務休憩フラグ
+    work_starttime: '', // 業務開始時間
+    work_endtime: '', // 業務終了時間
+    work_resttime: {}, // 業務休憩時間
+    work_rest_starttime: '', // 業務休憩開始時間
   }),
   getters: {
     double: (state) => {
@@ -44,6 +48,30 @@ export const useMystore = defineStore('myStore', {
         return;
       }
       this.rest_work_flag = flag;
+    },
+    set_work_starttime(time) {
+      this.work_starttime = time;
+    },
+    set_work_endtime(time) {
+      this.work_endtime = time;
+    },
+    set_work_resttime(time) {
+      const keys = Object.keys(this.work_resttime);
+      if (keys.length <= 0) {
+        this.work_resttime[0] = time;
+      } else {
+        const maxnum = Math.max(...keys);
+        this.work_resttime[maxnum + 1] = time;
+      }
+    },
+    set_work_rest_starttime(time) {
+      this.work_rest_starttime = time;
+    },
+    init_worktime() {
+      this.work_starttime = '';
+      this.work_endtime = '';
+      this.work_rest_starttime = '';
+      this.work_resttime = {};
     },
   },
   persist: {
