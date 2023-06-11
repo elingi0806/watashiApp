@@ -14,6 +14,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   try {
     fs.writeFileSync(filePath, JSON.stringify(body, null, '    '));
+    return response;
   } catch (err) {
     console.error('WriteTeamsSetting ERROR : CANNOT WRITE FILE', err);
     response.ResultCode = '001003';
@@ -22,7 +23,5 @@ export default defineEventHandler(async (event) => {
       statusMessage: 'Cannot Write File',
       data: response,
     });
-  } finally {
-    return response;
   }
 });

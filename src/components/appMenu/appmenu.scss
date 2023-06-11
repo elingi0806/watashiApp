@@ -6,13 +6,13 @@
 .menuTitle {
   height: 60px;
   width: 100%;
-  background-color: black; // テーマカラーを使えなかった
+  background-color: rgb(var(--v-theme-mainBase)); // テーマカラーを使えなかった
   position: relative;
   > div {
     height: 40px;
     width: 80%;
     h1 {
-      color: white; // テーマカラーを使えなかった
+      color: rgb(var(--v-theme-mainFont)); // テーマカラーを使えなかった
       line-height: 40px;
     }
     .v-btn {
@@ -44,8 +44,7 @@
     display: flex;
     position: relative;
     top: -30px;
-    color: rgb(var(--v-theme-primary));
-    border: 1px solid black;
+    color: rgb(var(--v-theme-mainFont));
 
     span {
       display: block;

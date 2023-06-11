@@ -29,5 +29,38 @@ async function SendTeamsMessage(url: string, data: object) {
   const formatResponse = util.formatResponse(response);
   return formatResponse;
 }
+/**
+ *  CSVデータの読み込み(内部API呼び出し)
+ */
+async function ReadWorkTime(date: string) {
+  const response = await useFetch('/api/read-worktime', {
+    method: 'POST',
+    body: { date: date },
+  });
+  const formatResponse = util.formatResponse(response);
+  return formatResponse;
+}
+/**
+ *  CSVデータの書き込み(内部API呼び出し)
+ */
+async function SaveWorkTime(
+  date: string,
+  start: string,
+  end: string,
+  rest: object
+) {
+  const response = await useFetch('/api/save-worktime', {
+    method: 'POST',
+    body: { date: date, start: start, end: end, rest: rest },
+  });
+  const formatResponse = util.formatResponse(response);
+  return formatResponse;
+}
 
-export default { ReadTeamsSetting, WriteTeamsSetting, SendTeamsMessage };
+export default {
+  ReadTeamsSetting,
+  WriteTeamsSetting,
+  SendTeamsMessage,
+  ReadWorkTime,
+  SaveWorkTime,
+};

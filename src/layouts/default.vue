@@ -39,17 +39,24 @@
       :value="dialog"
       title="About me"
       message="お知らせ"
+      :width="400"
       :buttonCount="0"
       okText="閉じる"
       @clickBatu="dialog = false"
     >
       <div>
-        内藤 春が作成したデスクトップアプリです。<br />
+        内藤 春が作成したアプリです。<br />
         個人学習用のため頒布はしません。<br /><br />
         【関連サイト】
-        <ul>
-          <li>ICON8：<a href="https://icons8.com">https://icons8.com</a></li>
-        </ul>
+        <div style="width: 100%; padding-left: 30px">
+          <ul>
+            <li>
+              ICON8：<a href="https://icons8.com" target="_blank"
+                >https://icons8.com</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </DialogAppdialog>
   </v-app>

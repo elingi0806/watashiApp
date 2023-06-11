@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
   try {
     await axios.post(body.url, body.data);
     console.log('SendTeamsMessage SUCCESS', response);
+    return response;
   } catch (err) {
     console.error('SendTeamsMessage ERROR', err);
     throw createError({
@@ -17,5 +18,4 @@ export default defineEventHandler(async (event) => {
       data: { ResultCode: '002001' },
     });
   }
-  return response;
 });

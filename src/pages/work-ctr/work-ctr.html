@@ -1,5 +1,5 @@
 <v-container>
-  <v-row>
+  <v-row style="height: 50px">
     <v-col cols="12" class="teamsSendSetting">
       <span>業務開始・終了時にTeamsにメッセージを送信する</span>
       <div class="teamsicon">
@@ -23,44 +23,85 @@
         hide-details
       ></v-switch>
     </v-col>
-    <v-col cols="12">
-      <v-icon :icon="mdiHome" color="accent"></v-icon>
-      <div>
-        webhook:
-        <input class="appInput" v-model="json_teams_data.webhook" />
-        title:
-        <input class="appInput" v-model="json_teams_data.title" />
-        text:
-        <input class="appInput" v-model="json_teams_data.text" />
-      </div>
-      <v-btn class="appButton" variant="outlined" @click="saveSetting">
-        Button
-      </v-btn>
-    </v-col>
   </v-row>
 
-  <v-row>
-    <v-col cols="9"></v-col>
-    <v-col cols="3">
-      <v-btn @click="sendTeams" :disabled="!sendMessageFlag">Teams送信</v-btn>
-      <v-btn>業務開始</v-btn>
-    </v-col>
-  </v-row>
+  <!--設定ボタン-->
+  <v-btn
+    class="work-setting-btn"
+    :icon="mdiCog"
+    color="fontColor"
+    variant="text"
+    @click="settingTeamsDialog=true"
+    :disabled="!sendMessageFlag"
+  >
+  </v-btn>
 
-  <v-row>
-    <v-btn @click="dialog = !dialog">test</v-btn>
-  </v-row>
+  <!--テスト-->
+  <span>{{starttimeStr}} ~ {{endtimeStr}}</span>
+  <v-btn @click="test">csv読み込み</v-btn>
+  <v-btn @click="test2">csv書き込み</v-btn>
 
-  <v-row style="border: 1px solid black">
-    <DialogAppdialog
-      :value="dialog"
-      :title="dialogProps.title"
-      :buttonCount="dialogProps.buttonCount"
-      :width="dialogProps.width"
-      @clickOk="dialogOK"
-      @clickBatu="dialogCancel"
+  <div class="work-div">
+    <v-btn
+      v-show="!startWorkingFlag"
+      class="work-start-btn absoluteCenter"
+      @click="startWork"
+      >業務開始</v-btn
     >
-      {{dialogProps.message}}
-    </DialogAppdialog>
-  </v-row>
+    <div v-show="startWorkingFlag" class="work-end-div">
+      <v-btn class="work-end-btn" @click="restWork">
+        <span v-show="!restWorkingFlag">休憩</span>
+        <span v-show="restWorkingFlag">休憩終了</span>
+      </v-btn>
+      <v-btn class="work-end-btn" @click="endWork">業務終了</v-btn>
+    </div>
+  </div>
+
+  <!--Teamsの設定ダイアログ-->
+  <DialogAppdialog
+    :value="settingTeamsDialog"
+    title="Teams送信設定"
+    :buttonCount="2"
+    :width="500"
+    @clickOk="teamsSettingOK"
+    @clickCancel="teamsSettingCancel"
+  >
+    <div class="work-setting-div">
+      <v-row>
+        <v-col cols="3">
+          <span> webhook</span>
+        </v-col>
+        <v-col cols="9">
+          <input class="appInput" v-model="json_teams_data.webhook" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="3">
+          <span>タイトル</span>
+        </v-col>
+        <v-col cols="9">
+          <input class="appInput" v-model="json_teams_data.title" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="3">
+          <span>メッセージ</span>
+        </v-col>
+        <v-col cols="9">
+          <input class="appInput" v-model="json_teams_data.text" />
+        </v-col>
+      </v-row>
+    </div>
+  </DialogAppdialog>
+  <!--お知らせ関係-->
+  <DialogAppdialog
+    :value="dialog"
+    :title="dialogProps.title"
+    :buttonCount="dialogProps.buttonCount"
+    :width="dialogProps.width"
+    @clickOk="dialogOK"
+    @clickBatu="dialogCancel"
+  >
+    {{dialogProps.message}}
+  </DialogAppdialog>
 </v-container>

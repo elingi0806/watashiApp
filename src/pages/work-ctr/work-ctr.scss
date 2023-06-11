@@ -1,20 +1,61 @@
+// 先頭行のスタイル
 .teamsSendSetting {
   position: relative;
   display: flex;
   width: 100%;
-  height: 40px;
+  height: 50px;
   span {
-    line-height: 40px;
+    line-height: 50px;
     font-size: 14px;
-    color: rgb(var(--v-theme-primary));
+    color: rgb(var(--v-theme-fontColor));
   }
   .teamsicon {
     position: relative;
+    top: 3px;
     height: 40px;
     width: 35px;
   }
   .teamsSettingSwitch {
     position: relative;
-    top: -10px;
+    top: -5px;
+  }
+}
+// 設定ボタン
+.work-setting-btn {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+}
+// ページの中央
+.work-div {
+  position: relative;
+  height: calc(100% - 50px);
+  width: 100%;
+  // 業務開始ボタン
+  .work-start-btn {
+    aspect-ratio: 1/1;
+    height: 80%;
+    width: auto;
+  }
+  .work-end-div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    // 業務休憩・終了ボタン
+    .work-end-btn {
+      aspect-ratio: 1/1;
+      height: auto;
+      width: 40%;
+      margin: auto;
+    }
+  }
+}
+// teams設定ダイアログ
+.work-setting-div {
+  span {
+    line-height: 35px;
+  }
+  input {
+    width: 95%;
   }
 }

@@ -43,6 +43,7 @@ export default defineEventHandler(async () => {
     fileData.text = fileContent.text;
     response.FileData = fileData;
     console.error('ReadTeamsSetting SUCCESS : ', response);
+    return response;
   } catch (err: any) {
     response.ResultCode = '001001';
     response.FileData = err;
@@ -52,7 +53,5 @@ export default defineEventHandler(async () => {
       statusMessage: 'Not Found Content',
       data: response,
     });
-  } finally {
-    return response;
   }
 });

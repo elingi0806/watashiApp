@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   },
   vite: {
     ssr: {
-      noExternal: ['vuetify'],
+      noExternal: ['vuetify', 'moment'],
     },
     define: {
       'process.env.DEBUG': false,

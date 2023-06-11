@@ -40,6 +40,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           'warning',
           'tips',
           'mainBase',
+          'mainFont',
           'fontColor',
           'borderColor',
           'disabledFontColor',

@@ -16,21 +16,13 @@
           <slot></slot>
         </v-card-text>
         <v-card-actions v-show="buttonCount > 0" class="dialogButtons">
-          <v-btn @click="clickOk" class="appButton"> {{okText}} </v-btn>
-          <v-btn
-            v-show="buttonCount > 1"
-            @click="clickCancel"
-            class="appButton"
-          >
+          <v-btn v-if="buttonCount > 1" @click="clickCancel" class="appButton">
             {{cancelText}}
           </v-btn>
-          <v-btn
-            v-show="buttonCount > 2"
-            @click="clickCustom"
-            class="appButton"
-          >
+          <v-btn v-if="buttonCount > 2" @click="clickCustom" class="appButton">
             {{customText}}
           </v-btn>
+          <v-btn @click="clickOk" class="appButton"> {{okText}} </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
