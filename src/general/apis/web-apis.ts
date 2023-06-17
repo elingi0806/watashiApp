@@ -47,11 +47,18 @@ async function SaveWorkTime(
   date: string,
   start: string,
   end: string,
-  rest: object
+  rest: object,
+  alltime: string
 ) {
   const response = await useFetch('/api/save-worktime', {
     method: 'POST',
-    body: { date: date, start: start, end: end, rest: rest },
+    body: {
+      date: date,
+      start: start,
+      end: end,
+      rest: rest,
+      alltime: alltime,
+    },
   });
   const formatResponse = util.formatResponse(response);
   return formatResponse;

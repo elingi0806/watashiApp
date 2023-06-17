@@ -10,7 +10,7 @@
           ✖️
         </button>
         <v-card-title v-show="title !== ''">
-          <h2>{{title}}</h2>
+          <h3>{{title}}</h3>
         </v-card-title>
         <v-card-text class="dialogContent">
           <slot></slot>
@@ -19,10 +19,17 @@
           <v-btn v-if="buttonCount > 1" @click="clickCancel" class="appButton">
             {{cancelText}}
           </v-btn>
-          <v-btn v-if="buttonCount > 2" @click="clickCustom" class="appButton">
+          <v-btn
+            v-if="buttonCount > 2"
+            @click="clickCustom"
+            class="appButton"
+            :disabled="disabledCustom"
+          >
             {{customText}}
           </v-btn>
-          <v-btn @click="clickOk" class="appButton"> {{okText}} </v-btn>
+          <v-btn @click="clickOk" class="appButton" :disabled="disabledOK">
+            {{okText}}
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

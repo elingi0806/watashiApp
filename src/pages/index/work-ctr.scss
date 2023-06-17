@@ -3,21 +3,21 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: 50px;
+  height: 53px;
   span {
-    line-height: 50px;
+    line-height: 53px;
     font-size: 14px;
     color: rgb(var(--v-theme-fontColor));
   }
   .teamsicon {
     position: relative;
-    top: 3px;
+    top: 5px;
     height: 40px;
     width: 35px;
   }
   .teamsSettingSwitch {
     position: relative;
-    top: -5px;
+    top: -2px;
   }
 }
 // 設定ボタン
@@ -29,7 +29,7 @@
 // ページの中央
 .work-div {
   position: relative;
-  height: calc(100% - 50px);
+  height: calc(100% - 83px);
   width: 100%;
   // 業務開始ボタン
   .work-start-btn {
@@ -52,10 +52,12 @@
 }
 // teams設定ダイアログ
 .work-setting-div {
-  span {
-    line-height: 35px;
-  }
+  font-size: 14px;
   input {
     width: 95%;
+    margin: auto;
+  }
+  .dialog-input-row span {
+    line-height: 32px;
   }
 }

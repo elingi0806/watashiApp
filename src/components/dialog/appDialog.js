@@ -39,6 +39,16 @@ export default {
       type: String,
       default: 'CUSTOM',
     },
+    // OKボタンをdisabledにするか
+    disabledOK: {
+      type: Boolean,
+      default: false,
+    },
+    // 3つめのボタンをdisabledにするか
+    disabledCustom: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {};

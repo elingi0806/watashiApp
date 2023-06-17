@@ -8,8 +8,10 @@ export default defineEventHandler(async () => {
   }
   interface fileDataObj {
     webhook: string;
-    title: string;
-    text: string;
+    start_title: string;
+    start_text: string;
+    end_title: string;
+    end_text: string;
   }
   // 設定ファイルの置き場所
   const filePath: string = 'src/assets/json/webhook_teams.json';
@@ -19,8 +21,10 @@ export default defineEventHandler(async () => {
   };
   const fileData: fileDataObj = {
     webhook: '',
-    title: '',
-    text: '',
+    start_title: '',
+    start_text: '',
+    end_title: '',
+    end_text: '',
   };
   // ファイルの存在確認
   try {
@@ -39,8 +43,10 @@ export default defineEventHandler(async () => {
     const fileResponse = fs.readFileSync(filePath, 'utf8');
     const fileContent = JSON.parse(fileResponse);
     fileData.webhook = fileContent.webhook;
-    fileData.title = fileContent.title;
-    fileData.text = fileContent.text;
+    fileData.start_title = fileContent.start_title;
+    fileData.start_text = fileContent.start_text;
+    fileData.end_title = fileContent.end_title;
+    fileData.end_text = fileContent.end_text;
     response.FileData = fileData;
     console.error('ReadTeamsSetting SUCCESS : ', response);
     return response;

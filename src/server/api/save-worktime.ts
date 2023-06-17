@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
   const endtime = body.end; // 終了日時
   const resttime = JSON.stringify(body.rest); // 休憩時間
   const year_month_day = body.date; // 書き込み日時
+  const workalltime = body.alltime; // 就業時間
 
   const year = year_month_day.substring(0, 4);
   const year_month = year_month_day.substring(0, 6);
@@ -26,7 +27,7 @@ export default defineEventHandler(async (event) => {
 
   // ディレクトリの存在確認
   if (!fs.existsSync(dirPath)) {
-    // ディレクトリが存在しなければファイルを生成する
+    // ディレクトリが存在しなければディレクトリを生成する
     fs.mkdir(dirPath, (err) => {
       if (err) {
         console.error(`${dirPath} -ディレクトリ作成失敗`, err);
@@ -43,7 +44,7 @@ export default defineEventHandler(async (event) => {
   let csvColums: string[] = [];
   let csvData: string = '';
   // 書き込む新しいデータ
-  const newStr = `${year_month_day},${starttime},${endtime},${resttime}`;
+  const newStr = `${year_month_day},${starttime},${endtime},${resttime},${workalltime}`;
   try {
     // ファイルの存在確認
     if (fs.existsSync(filePath)) {
@@ -62,11 +63,12 @@ export default defineEventHandler(async (event) => {
       }
     } else {
       // ファイルが存在しない場合
-      csvColums.push('date,start,end,rest');
+      csvColums.push('date,start,end,rest,alltime');
       csvColums.push(newStr);
     }
     csvData = csvColums.join('\n'); // 配列を改行で区切った文字列に変換
   } catch (err) {
+    console.error(`ファイルの書き込み準備失敗`, err);
     response.ResultCode = '004002';
     throw createError({
       statusCode: 404,
@@ -76,16 +78,16 @@ export default defineEventHandler(async (event) => {
   }
 
   // ファイルに書き込み
-  try {
-    fs.writeFileSync(filePath, csvData);
-  } catch (err) {
-    response.ResultCode = '004003';
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'CANNOT WRITE FILE',
-      data: response,
-    });
-  }
-
+  fs.writeFile(filePath, csvData, function (err) {
+    if (err) {
+      console.error(`ファイルの書き込み失敗`, err);
+      response.ResultCode = '004003';
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'CANNOT WRITE FILE',
+        data: response,
+      });
+    }
+  });
   return response;
 });
