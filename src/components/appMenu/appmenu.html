@@ -38,20 +38,63 @@
 
     <!--menu-->
     <v-list density="compact" mandatory>
-      <v-list-item
-        v-for="menu in menus"
-        :key="menu.id"
-        :value="menu.id"
-        color="primary"
-        class="pa-0"
-        :active="menu.id === selectedMenu"
-        @click="selectMenu(menu.id)"
-      >
-        <NuxtLink :to="menu.link" class="nuxtLinkDiv">
-          <v-icon :icon="menu.icon"></v-icon>
-          <v-list-item-title v-text="menu.title"></v-list-item-title>
-        </NuxtLink>
-      </v-list-item>
+      <template v-for="menu in menus" :key="menu.id">
+        <v-list-item
+          v-if="!menu.childs || menu.childs.length <= 0"
+          :value="menu.id"
+          color="primary"
+          class="pa-0"
+          :active="menu.id === selectedMenu"
+          @click="selectMenu(menu.id)"
+        >
+          <NuxtLink :to="menu.link" class="nuxtLinkDiv">
+            <v-icon :icon="menu.icon"></v-icon>
+            <v-list-item-title v-text="menu.title"></v-list-item-title>
+          </NuxtLink>
+        </v-list-item>
+        <v-list-group v-else :value="menu.title" :append-icon="null">
+          <template v-slot:activator="{ isOpen,props }">
+            <!--開閉元になるメニュー-->
+            <v-list-item
+              :active="false"
+              :value="menu.id"
+              class="pa-0"
+              :class="{'active-menu':menu.id === selectedMenu}"
+              @click="selectMenu(menu.id)"
+            >
+              <NuxtLink :to="menu.link" class="nuxtLinkDiv">
+                <v-icon :icon="menu.icon"></v-icon>
+                <v-list-item-title v-text="menu.title"></v-list-item-title>
+              </NuxtLink>
+            </v-list-item>
+            <!--開閉ボタン-->
+            <v-btn
+              v-bind="props"
+              class="expand-icon"
+              :size="25"
+              :class="{'rotate-icon':isOpen}"
+              variant="text"
+              :icon="mdiAppleKeyboardControl"
+            >
+            </v-btn>
+          </template>
+
+          <v-list-item
+            v-for="submenu in menu.childs"
+            :key="submenu.id"
+            :value="submenu.id"
+            color="primary"
+            class="pa-0"
+            :active="submenu.id === selectedMenu"
+            @click="selectMenu(submenu.id)"
+          >
+            <NuxtLink :to="submenu.link" class="nuxtLinkDiv">
+              <v-icon :icon="submenu.icon"></v-icon>
+              <v-list-item-title v-text="submenu.title"></v-list-item-title>
+            </NuxtLink>
+          </v-list-item>
+        </v-list-group>
+      </template>
     </v-list>
   </v-navigation-drawer>
 </div>

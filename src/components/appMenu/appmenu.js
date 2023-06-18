@@ -1,4 +1,12 @@
-import { mdiMenu, mdiArrowLeftThick, mdiHome, mdiChartArc } from '@mdi/js';
+import {
+  mdiMenu,
+  mdiBriefcase,
+  mdiArrowLeftThick,
+  mdiAws,
+  mdiHistory,
+  mdiChartArc,
+  mdiAppleKeyboardControl,
+} from '@mdi/js';
 import { useMystore } from '../../stores/mainStore.js';
 const mystore = useMystore();
 
@@ -8,29 +16,55 @@ export default {
     return {
       mdiMenu,
       mdiArrowLeftThick,
+      mdiAppleKeyboardControl,
       drawer: false,
       selectedMenu: 0,
       menus: [
         {
-          id: 0,
+          id: 1,
+          icon: mdiBriefcase,
+          title: 'WORK',
           link: '/',
-          icon: mdiHome,
-          title: 'WORK TIME',
+          group: true,
+          childs: [
+            {
+              id: 11,
+              link: '/',
+              icon: mdiChartArc,
+              title: 'WORK TIME',
+            },
+            {
+              id: 12,
+              link: '/',
+              icon: mdiHistory,
+              title: 'WORK HISTORY',
+            },
+          ],
         },
         {
-          id: 1,
+          id: 2,
           link: '/aws-setting',
-          icon: mdiChartArc,
+          icon: mdiAws,
           title: 'AWS SETTING',
+          group: false,
         },
       ],
       menutitle: '',
+      allmenus: [],
     };
   },
   computed: {
     //
   },
   mounted() {
+    this.menus.forEach((m) => {
+      this.allmenus.push(m);
+      if (m.group && m.childs && m.childs.length > 0) {
+        m.childs.forEach((subm) => {
+          this.allmenus.push(subm);
+        });
+      }
+    });
     if (typeof mystore.selected_menu_id !== 'undefined') {
       this.selectedMenu = mystore.selected_menu_id;
       this.setMenuTitle();
@@ -69,7 +103,7 @@ export default {
       this.selectedMenu = menuID;
     },
     setMenuTitle() {
-      let tmptitle = this.menus.find((m) => m.id === this.selectedMenu);
+      let tmptitle = this.allmenus.find((m) => m.id === this.selectedMenu);
       if (!tmptitle) {
         tmptitle = { title: 'Not Found' };
       }
