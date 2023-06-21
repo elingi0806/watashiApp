@@ -1,0 +1,41 @@
+.a-week-timeline-div {
+  width: 95%;
+  height: calc(100% - 100px);
+  display: flex;
+
+  .a-day-timeline-disp {
+    height: 100%;
+    width: 50px;
+    text-align: center;
+  }
+
+  .a-day-timeline-div {
+    height: 100%;
+    width: calc(100% / 7);
+    border-right: 1px dotted black;
+    border-left: 1px dotted black;
+  }
+
+  .day-disp-date {
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-bottom: 1px solid black;
+  }
+  .day-disp-worktime {
+    height: 50px;
+    border-bottom: 1px solid black;
+  }
+
+  .a-hour-timeline-div {
+    max-height: 40px;
+    height: calc((100% - 80px) / 18);
+    border-bottom: 1px solid black;
+    &.last-div {
+      border-bottom: 1px solid transparent;
+    }
+  }
+}
+.today-div {
+  background-color: rgba(var(--v-theme-secondary), 0.2);
+}

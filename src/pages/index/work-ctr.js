@@ -544,8 +544,5 @@ export default {
         return false;
       }
     },
-    test() {
-      this.finishDialog = true;
-    },
   },
 };

@@ -18,7 +18,7 @@ export default {
       mdiArrowLeftThick,
       mdiAppleKeyboardControl,
       drawer: false,
-      selectedMenu: 0,
+      selectedMenu: 1,
       menus: [
         {
           id: 1,
@@ -29,13 +29,7 @@ export default {
           childs: [
             {
               id: 11,
-              link: '/',
-              icon: mdiChartArc,
-              title: 'WORK TIME',
-            },
-            {
-              id: 12,
-              link: '/',
+              link: '/work-history',
               icon: mdiHistory,
               title: 'WORK HISTORY',
             },

@@ -1,0 +1,54 @@
+<v-container>
+  <!--
+  <div style="height: 200px; width: 200px; position: relative">
+    <GraphAppgraph
+      :chartType="chartType"
+      :chartData="chartData"
+      :chartOptions="chartOptions"
+    />
+  </div>
+  -->
+
+  <div style="height: calc(100% - 100px)">
+    <v-table fixed-header height="400px">
+      <thead>
+        <tr>
+          <th class="text-left">日付</th>
+          <th class="text-left">開始</th>
+          <th class="text-left">終了</th>
+          <th class="text-left">休憩</th>
+          <th class="text-left">勤務時間</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in tableDatas" :key="item.name">
+          <td>{{ item.datestr }}</td>
+          <td>{{ item.start }}</td>
+          <td>{{ item.end }}</td>
+          <td>
+            <div
+              v-for="(rest, index) in item.rest"
+              :key="item.date + '-rest'+index"
+            >
+              <span>{{rest.start}} ~ {{rest.end}}</span>
+            </div>
+          </td>
+          <td>{{ item.alltime }}</td>
+        </tr>
+      </tbody>
+    </v-table>
+  </div>
+
+  <!--お知らせ関係-->
+  <DialogAppdialog
+    :value="dialog"
+    :title="dialogProps.title"
+    :buttonCount="dialogProps.buttonCount"
+    :width="dialogProps.width"
+    @clickOk="dialogOK"
+    @clickCancel="dialogCancel"
+    @clickBatu="dialogCancel"
+  >
+    {{dialogProps.message}}
+  </DialogAppdialog>
+</v-container>

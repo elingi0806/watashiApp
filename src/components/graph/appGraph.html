@@ -1,0 +1,22 @@
+<div
+  style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+  "
+>
+  <GChart
+    :type="chartType"
+    :data="chartData"
+    :options="chartOptions"
+    :createChart="
+    (el, google, type) => {
+      return new google.visualization[type](el)
+    }
+  "
+  />
+</div>

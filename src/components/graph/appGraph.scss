@@ -1,0 +1,140 @@
+// サイドメニュー関係
+.menuButton {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.menuTitle {
+  height: 60px;
+  width: 100%;
+  background-color: rgb(var(--v-theme-mainBase)); // テーマカラーを使えなかった
+  position: relative;
+  > div {
+    height: 40px;
+    width: 80%;
+    h1 {
+      color: rgb(var(--v-theme-mainFont)); // テーマカラーを使えなかった
+      line-height: 40px;
+    }
+    .v-btn {
+      position: absolute;
+      right: 5px;
+      top: -2px;
+    }
+  }
+}
+.nuxtLinkDiv {
+  height: 40px;
+  width: 100%;
+  padding-left: 10px;
+  display: flex;
+  color: rgb(var(--v-theme-fontColor));
+  text-decoration: none !important;
+  position: relative;
+  > .v-icon {
+    margin-top: 7px;
+  }
+  .v-list-item-title {
+    padding-left: 10px;
+    line-height: 40px;
+  }
+}
+// デフォルトの開閉アイコンは消しておく
+.v-list-item__append {
+  display: none !important;
+}
+.active-menu {
+  background-color: rgba(var(--v-theme-primary), 0.1);
+}
+.expand-icon {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+  transform: rotate(180deg);
+  color: rgb(var(--v-theme-fontColor));
+  .v-icon {
+    position: absolute;
+    top: 3px;
+  }
+}
+.rotate-icon {
+  transform: rotate(0deg);
+}
+.titleBox {
+  h2 {
+    display: flex;
+    position: relative;
+    top: -30px;
+    color: rgb(var(--v-theme-mainFont));
+
+    span {
+      display: block;
+      transform: translate(0, 105%);
+      transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+    }
+    span:nth-child(2) {
+      transition-delay: 0.06s;
+    }
+    span:nth-child(3) {
+      transition-delay: 0.12s;
+    }
+    span:nth-child(4) {
+      transition-delay: 0.18s;
+    }
+    span:nth-child(5) {
+      transition-delay: 0.24s;
+    }
+    span:nth-child(6) {
+      transition-delay: 0.3s;
+    }
+    span:nth-child(7) {
+      transition-delay: 0.36s;
+    }
+    span:nth-child(8) {
+      transition-delay: 0.42s;
+    }
+    span:nth-child(9) {
+      transition-delay: 0.48s;
+    }
+    span:nth-child(10) {
+      transition-delay: 0.54s;
+    }
+    span:nth-child(11) {
+      transition-delay: 0.6s;
+    }
+    span:nth-child(12) {
+      transition-delay: 0.66s;
+    }
+    span:nth-child(13) {
+      transition-delay: 0.72s;
+    }
+    span:nth-child(14) {
+      transition-delay: 0.78s;
+    }
+    span:nth-child(15) {
+      transition-delay: 0.84s;
+    }
+    span:nth-child(16) {
+      transition-delay: 0.9s;
+    }
+    span:nth-child(17) {
+      transition-delay: 0.96s;
+    }
+    span:nth-child(18) {
+      transition-delay: 1.02s;
+    }
+    span:nth-child(19) {
+      transition-delay: 1.08s;
+    }
+    span:nth-child(20) {
+      transition-delay: 1.14s;
+    }
+  }
+}
+.animation h2 span {
+  transform: translate(0, 0);
+  transition: 0s;
+  transition-delay: 0s !important;
+}

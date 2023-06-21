@@ -49,18 +49,26 @@ export default defineEventHandler(async (event) => {
         // 休憩時間のデータ読み込み
         const jsonStartIndex = col.indexOf('{');
         const jsonEndIndex = col.indexOf('}');
+        let tmpCol = '';
         if (jsonStartIndex >= 0 && jsonEndIndex >= 0) {
           // 休憩時間のデータが存在しなければ先に抜き出して配列化されないようにする
           jsonStr = col.slice(jsonStartIndex, jsonEndIndex + 1);
           existJsonFlag = true;
+          const start = col.substring(0, jsonStartIndex);
+          const end = col.substring(jsonEndIndex + 2, col.length);
+          tmpCol = start + end;
+        } else {
+          tmpCol = col;
         }
-        colColum = col.split(',');
+        colColum = tmpCol.split(',');
+        let jsonFlag = false;
         csvColumsTitle.forEach((c, i) => {
           // 3つ目のデータは休憩時間のデータ
           if (i !== 3 || !existJsonFlag) {
-            obj[c] = colColum[i];
+            jsonFlag ? (obj[c] = colColum[i - 1]) : (obj[c] = colColum[i]);
           } else {
             obj[c] = jsonStr;
+            jsonFlag = true;
           }
         });
         csvColumsArr.push(obj);

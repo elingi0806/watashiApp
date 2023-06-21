@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 export const useMystore = defineStore('myStore', {
   state: () => ({
-    selected_menu_id: 0, // 選択中のメニューID
+    selected_menu_id: 1, // 選択中のメニューID
     counter: 0,
     teams_send_flag: false, // Teams送信フラグ
     start_work_flag: false, // 業務開始フラグ
