@@ -24,6 +24,9 @@
     "vuetify": "^3.3.1"
   },
   "dependencies": {
+    "@aws-sdk/client-cost-explorer": "^3.357.0",
+    "@aws-sdk/client-s3": "^3.358.0",
+    "@aws-sdk/credential-providers": "^3.359.0",
     "@nuxtjs/axios": "^5.13.6",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@pinia/nuxt": "^0.4.11",

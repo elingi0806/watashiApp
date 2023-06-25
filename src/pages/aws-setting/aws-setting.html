@@ -1,3 +1,30 @@
 <v-container>
-  <div style="height: 100%; width: 100%">index.html<br /></div>
+  <div class="div-container">AWS Setting</div>
+
+  <!--お知らせ関係-->
+  <DialogAppdialog
+    :value="dialog"
+    :title="dialogProps.title"
+    :buttonCount="dialogProps.buttonCount"
+    :width="dialogProps.width"
+    @clickOk="dialogOK"
+    @clickCancel="dialogCancel"
+    @clickBatu="dialogCancel"
+  >
+    <v-row class="w-100 ma-0 pa-0">{{dialogProps.message}}</v-row>
+    <v-row v-show="isSaveDialog" class="w-100 ma-0 pa-0 dialog-save-data">
+      <v-col cols="12" sm="4" md="4" lg="4" xl="4" xxl="4" class="pl-2">
+        <span>保存先</span>
+      </v-col>
+      <v-col cols="12" sm="8" md="8" lg="8" xl="8" xxl="8">
+        <span>{{targetbucket}}</span>
+      </v-col>
+      <v-col cols="12" sm="4" md="4" lg="4" xl="4" xxl="4" class="pl-2">
+        <span>ファイル名</span>
+      </v-col>
+      <v-col cols="12" sm="8" md="8" lg="8" xl="8" xxl="8">
+        <span>{{fileName + filetype}}</span>
+      </v-col>
+    </v-row>
+  </DialogAppdialog>
 </v-container>

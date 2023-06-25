@@ -3,22 +3,24 @@
   width: 100%;
   padding: 5px;
 }
-.select-date-div {
+.select-date-col {
+  height: 50px;
   width: 100%;
   // コストデータの取得月のプルダウン
   .select-items-cost {
     position: relative;
     height: 100%;
-    width: 170px;
-    padding: 5px;
+    width: 90%;
+    min-width: 250px;
     .select-box {
-      width: 170px;
       height: 40px;
+      width: 100%;
     }
   }
-  .get-cost-btn {
-    margin: auto auto auto 15px;
-  }
+}
+// コスト取得ボタン
+.get-cost-btn {
+  margin: auto;
 }
 // 説明文
 .explain-div {
@@ -55,38 +57,52 @@
     border: 1px dashed rgb(var(--v-theme-disabledFontColor));
   }
 }
+// s3関連の設定表示
 .s3-setting-div {
   position: relative;
-  width: calc(100% - 10px);
+  height: 50px;
+  width: 100%;
   .s3-bucketlist-div {
-    display: flex;
-  }
-  .select-items-bucket {
     position: relative;
+    display: flex;
+    width: 100%;
     height: 40px;
-    width: 300px;
-    padding: 5px;
-    .select-box {
-      width: 100%;
+    // バケット取得ボタン
+    .s3bucket-btn {
+      width: 80px;
+      left: 0px;
+    }
+    // バケットのプルダウン
+    .select-items-bucket {
+      position: relative;
       height: 40px;
-      &:disabled {
-        background-color: rgb(var(--v-theme-disabledBorderColor));
+      width: calc(100% - 100px);
+      padding: 5px;
+      left: 100px;
+      .select-box {
+        width: 100%;
+        height: 40px;
+        &:disabled {
+          background-color: rgb(var(--v-theme-disabledBorderColor));
+        }
       }
     }
   }
-  .s3bucket-btn {
-    width: 80px;
-    margin-left: 15px;
-  }
 }
-
+// ファイル一覧取得ボタン
+.getFile-btn {
+  width: 150px;
+}
 .s3-file-setting {
   position: relative;
   display: flex;
+  height: 40px;
   width: 100%;
   .filename-input {
+    margin-right: 10px;
     height: 40px;
-    width: 400px;
+    max-width: 300px;
+    width: calc(100% - 110px);
   }
   .select-items-filetype {
     position: relative;
@@ -105,25 +121,31 @@
     padding: 0;
   }
 }
-
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 599.99px) {
+  .item-name-small {
+    margin-left: 12px;
+    padding: 0;
+  }
+  .select-date-col {
+    // コストデータの取得月のプルダウン
+    .select-items-cost {
+      width: 100%;
+    }
+  }
   .s3-setting-div {
+    height: 40px;
     .s3-bucketlist-div {
-      position: relative;
-      height: 85px;
-      width: 100%;
-      display: block;
-    }
-    .select-items-bucket {
-      width: 100%;
-    }
-    .s3bucket-btn {
-      margin-left: auto;
-      margin-top: 5px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      -webkit-transform: translateX(-50%);
+      // バケットのプルダウン
+      .select-items-bucket {
+        left: 70px;
+        width: calc(100% - 65px);
+        min-width: 150px;
+      }
+      // バケット取得ボタン
+      .s3bucket-btn {
+        width: 60px;
+        margin: 0;
+      }
     }
   }
 }

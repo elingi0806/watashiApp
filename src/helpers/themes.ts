@@ -1,7 +1,7 @@
-import { ThemeDefinition } from 'vuetify';
+import { ThemeDefinition } from 'vuetify'
 
 // テーマ名
-export const MAIN_THEME = 'mainTheme';
+export const MAIN_THEME = 'mainTheme'
 // Light mode theme
 export const mainTheme: ThemeDefinition = {
   dark: false,
@@ -16,13 +16,13 @@ export const mainTheme: ThemeDefinition = {
     mainFont: '#ffffff',
     fontColor: '#666666',
     borderColor: '#808080',
-    disabledFontColor: '	#B1B3B6',
+    disabledFontColor: '#B1B3B6',
     disabledBorderColor: '#C0C0C0',
   },
-};
+}
 
 // Dark モードのテーマ名
-export const MAIN_DARK_THEME = 'mainDarkTheme';
+export const MAIN_DARK_THEME = 'mainDarkTheme'
 // Dark mode theme
 export const mainDarkTheme: ThemeDefinition = {
   dark: true,
@@ -40,4 +40,4 @@ export const mainDarkTheme: ThemeDefinition = {
     disabledFontColor: '	#B1B3B6',
     disabledBorderColor: '#C0C0C0',
   },
-};
+}

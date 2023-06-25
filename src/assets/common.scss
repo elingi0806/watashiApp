@@ -11,13 +11,24 @@
   transform: translateY(-50%) translateX(-50%);
   -webkit-transform: translateY(-50%) translateX(-50%);
 }
+.absoluteCenterH {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+.absoluteCenterW {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+}
 .v-container {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0 !important;
-  .v-row,
-  .v-col {
+  .v-row {
     margin: 0;
     padding: 0;
   }
@@ -37,8 +48,25 @@
   }
 }
 .appButton {
-  height: 30px;
-  width: 100px;
-  margin-left: 10px;
-  margin-right: 10px;
+  //
+}
+.v-select {
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+//スクロールバーデザイン
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: white;
+}
+::-webkit-scrollbar-thumb {
+  opacity: 0.6;
+  background-image: linear-gradient(180deg, rgba(var(--v-theme-primary), 0.5), rgba(var(--v-theme-primary), 1));
+  border-radius: 2.5px;
 }

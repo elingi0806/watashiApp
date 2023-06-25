@@ -22,13 +22,7 @@
       <v-row justify="center" no-gutters>
         <v-col class="text-center" cols="12">
           {{ new Date().getFullYear() }} — <strong>watashiApp</strong>
-          <v-btn
-            @click="showAboutMe"
-            color="primary"
-            flat
-            rounded="xl"
-            style="margin-left: 10px; height: 30px"
-          >
+          <v-btn @click="showAboutMe" color="primary" flat rounded="xl" style="margin-left: 10px; height: 30px">
             About me
           </v-btn>
         </v-col>
@@ -50,11 +44,7 @@
         【関連サイト】
         <div style="width: 100%; padding-left: 30px">
           <ul>
-            <li>
-              ICON8：<a href="https://icons8.com" target="_blank"
-                >https://icons8.com</a
-              >
-            </li>
+            <li>ICON8：<a href="https://icons8.com" target="_blank">https://icons8.com</a></li>
           </ul>
         </div>
       </div>
@@ -63,8 +53,8 @@
 </template>
 
 <script>
-import appMenu from '@/components/appMenu';
-import '@/assets/common.scss';
+import appMenu from '@/components/appMenu'
+import '@/assets/common.scss'
 
 export default {
   name: 'DefaultLayout',
@@ -72,14 +62,14 @@ export default {
   data() {
     return {
       dialog: false,
-    };
+    }
   },
   methods: {
     showAboutMe() {
-      this.dialog = true;
+      this.dialog = true
     },
   },
-};
+}
 </script>
 
 <style>
